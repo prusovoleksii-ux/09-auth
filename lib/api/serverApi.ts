@@ -17,7 +17,7 @@ export async function getNotes({
       ...(tag ? { tag } : {}),
     },
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+      Cookie: cookieStore.toString(),
     },
   });
 

@@ -24,11 +24,10 @@ export async function proxy(request: NextRequest) {
         const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
         for (const cookieStr of cookieArray) {
           const parsed = parse(cookieStr);
-          const options = {
-            expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
-            path: parsed.Path,
-            maxAge: Number(parsed['Max-Age']),
-          };
+          const options: Partial<{ expires: Date; path: string; maxAge: number }> = {};
+          if (parsed.expires) options.expires = new Date(parsed.expires);
+          if (parsed.path) options.path = parsed.path;
+          if (parsed['max-age']) options.maxAge = Number(parsed['max-age']);
           if (parsed.accessToken) cookieStore.set('accessToken', parsed.accessToken, options);
           if (parsed.refreshToken) cookieStore.set('refreshToken', parsed.refreshToken, options);
         }
