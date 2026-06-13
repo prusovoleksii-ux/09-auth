@@ -10,6 +10,7 @@ export async function getNotes({
   page = 1,
   tag,
 }: GetNotesParams = {}): Promise<Resp> {
+  const cookieStore = await cookies();
   const res = await nextServer.get<Resp>('/notes', {
     params: {
       search,
