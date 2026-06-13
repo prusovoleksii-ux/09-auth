@@ -6,10 +6,10 @@ import { ErrorMessage, Field,
 import css from './NoteForm.module.css'
 import type { NewNoteValues } from '@/types/note';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postNote } from '@/lib/api';
 import * as Yup from "yup";
 import { useRouter } from 'next/navigation';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
+import { postNote } from '@/lib/api/clientApi';
 
 
 export default function NoteForm() {
