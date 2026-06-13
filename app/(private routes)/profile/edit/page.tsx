@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import css from './EditProfilePage.module.css';
 import { getMe, updateMe } from '@/lib/api/clientApi';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function EditProfilePage() {
+    const router = useRouter();
 
     const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
@@ -25,6 +27,7 @@ export default function EditProfilePage() {
     const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         await updateMe({ email, username });
+        router.push('/profile');
     };
     
 

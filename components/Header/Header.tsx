@@ -14,8 +14,8 @@ const Header = () => {
                     <li>
                         <Link href='/notes/filter/all'>Notes</Link>
                     </li>
+                    <AuthNavigation />
                 </ul>
-                <AuthNavigation />
             </nav>
         </header>
     );
