@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function EditProfilePage() {
 
-    const [userName, setUserName] = useState('');
+    const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [photoUrl, setPhotoUrl] = useState('');
 
@@ -24,7 +24,7 @@ export default function EditProfilePage() {
 
     const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        await updateMe({ userName });
+        await updateMe({ email, username });
     };
     
 
@@ -33,12 +33,15 @@ export default function EditProfilePage() {
             <div className={css.profileCard}>
                 <h1 className={css.formTitle}>Edit Profile</h1>
 
-                <Image src={photoUrl}
-                    alt="User Avatar"
-                    width={120}
-                    height={120}
-                    className={css.avatar}
-                />
+                {photoUrl && (
+                    <Image
+                        src={photoUrl}
+                        alt="User Avatar"
+                        width={120}
+                        height={120}
+                        className={css.avatar}
+                    />
+                    )}
 
                 <form className={css.profileInfo} onSubmit={handleSaveUser}>
                 <div className={css.usernameWrapper}>
@@ -46,7 +49,7 @@ export default function EditProfilePage() {
                     <input id="username"
                     type="text"
                     className={css.input}
-                    defaultValue={userName}
+                    defaultValue={username}
                     onChange={handleChange}
                     />
                 </div>

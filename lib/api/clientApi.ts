@@ -99,16 +99,17 @@ export const checkSession = async () => {
 
 //getMe
 export const getMe = async () => {
-  const { data } = await nextServer.get<User>('/auth/me');
+  const { data } = await nextServer.get<User>('/users/me');
   return data;
 };
 
 //updateMe
 export type UpdateUserRequest = {
-  userName?: string;
+  email?: string;
+  username?: string;
 };
 
 export const updateMe = async (payload: UpdateUserRequest) => {
-  const res = await nextServer.put<User>('/auth/me', payload);
+  const res = await nextServer.patch<User>('/users/me', payload);
   return res.data;
 };
