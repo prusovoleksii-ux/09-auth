@@ -25,9 +25,10 @@ export async function getNotes({
 }
 
 export async function fetchNoteById(id: string): Promise<Note> {
+  const cookieStore = await cookies();
   const res = await nextServer.get<Note>(`/notes/${id}`, {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+      Cookie: cookieStore.toString(),
     },
   });
   return res.data;

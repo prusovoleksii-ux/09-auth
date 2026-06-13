@@ -1,6 +1,15 @@
 import { getServerMe } from '@/lib/api/serverApi';
 import css from './ProfilePage.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `NoteHub - Profile`,
+    description: 'Profile Page',
+  }
+}
 
 export default async function ProfilePage() {
 
@@ -11,9 +20,9 @@ export default async function ProfilePage() {
             <div className={css.profileCard}>
                 <div className={css.header}>
                     <h1 className={css.formTitle}>Profile Page</h1>
-                    <a href="/profile/edit" className={css.editProfileButton}>
+                    <Link href="/profile/edit" className={css.editProfileButton}>
                     Edit Profile
-                    </a>
+                    </Link>
                 </div>
                 <div className={css.avatarWrapper}>
                 <Image

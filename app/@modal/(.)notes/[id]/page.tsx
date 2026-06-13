@@ -1,6 +1,6 @@
 import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
 import NotePreviewClient from "./NotePreview.client";
-import { fetchNoteById } from "@/lib/api/clientApi";
+import { fetchNoteById } from "@/lib/api/serverApi";
 
 type PageProps = {
   params: Promise<{ id: string }>;

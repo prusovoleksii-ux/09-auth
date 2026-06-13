@@ -4,10 +4,12 @@ import css from './EditProfilePage.module.css';
 import { getMe, updateMe } from '@/lib/api/clientApi';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function EditProfilePage() {
     const router = useRouter();
 
+    const setUser = useAuthStore((state) => state.setUser);
     const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [photoUrl, setPhotoUrl] = useState('');
@@ -26,7 +28,8 @@ export default function EditProfilePage() {
 
     const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        await updateMe({ email, username });
+        const updatedUser = await updateMe({ email, username });
+        setUser(updatedUser);
         router.push('/profile');
     };
     
@@ -63,7 +66,7 @@ export default function EditProfilePage() {
                     <button type="submit" className={css.saveButton}>
                     Save
                     </button>
-                    <button type="button" className={css.cancelButton}>
+                    <button type="button" className={css.cancelButton} onClick={() => router.back()}>
                     Cancel
                     </button>
                 </div>
